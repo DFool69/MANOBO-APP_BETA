@@ -458,27 +458,27 @@ body {
 @keyframes openingFogDrift {
 
   0% {
-    opacity: 0.05;
+    opacity: 0.15;
     transform: translate3d(-3%, 0, 0) scale(1.05);
   }
 
   25% {
-    opacity: 0.22;
+    opacity: 0.32;
     transform: translate3d(-1%, -1%, 0) scale(1.08);
   }
 
   50% {
-    opacity: 0.15;
+    opacity: 0.35;
     transform: translate3d(2%, 1%, 0) scale(1.05);
   }
 
   75% {
-    opacity: 0.22;
+    opacity: 0.32;
     transform: translate3d(4%, -1%, 0) scale(1.08);
   }
 
   100% {
-    opacity: 0.05;
+    opacity: 0.15;
     transform: translate3d(-3%, 0, 0) scale(1.05);
   }
 
