@@ -172,11 +172,24 @@
         img.alt = "";
         buildPlaceholder(screen);
       } else {
-        img.src = screen.image;
-        img.alt = screen.alt || "";
-        if (screen.type === "menu") buildMenuButtons(screen);
-        if (screen.type === "story") buildStoryNav(screen);
+      img.src = screen.image;
+      img.alt = screen.alt || "";
+
+      // Remove any previous smoke animation
+      document.querySelectorAll(".opening-smoke").forEach(el => el.remove());
+
+      // Add moving smoke effect only on the opening screen
+      if (screen.id === "opening") {
+      const smoke = document.createElement("div");
+      smoke.className = "opening-smoke";
+      smoke.setAttribute("aria-hidden", "true");
+
+      frame.appendChild(smoke);
       }
+
+  if (screen.type === "menu") buildMenuButtons(screen);
+  if (screen.type === "story") buildStoryNav(screen);
+    }
       currentScreen = id;
       announce(screen.alt || screen.heading || id);
       updateHomeVisibility();
