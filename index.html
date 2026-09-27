@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manobo Tribe — An Interactive Presentation</title>
+  <link rel="stylesheet" href="styles/presentation.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="chrome-bar">
+      <button id="btn-home" type="button" class="chrome-btn" aria-label="Return to title screen" hidden>&#8962;</button>
+      <span class="chrome-title">Manobo Tribe</span>
+      <div class="chrome-controls">
+        <button id="btn-mute" type="button" class="chrome-btn" aria-label="Mute" aria-pressed="false">&#128266;</button>
+        <button id="btn-fullscreen" type="button" class="chrome-btn" aria-label="Toggle fullscreen" aria-pressed="false">&#10786;</button>
+      </div>
+    </header>
+
+    <main id="stage">
+      <div id="frame">
+        <img id="screen-image" alt="" draggable="false" />
+        <div id="hotspots"></div>
+      </div>
+    </main>
+
+    <audio id="bg-audio" loop hidden>
+      <!-- No audio asset was supplied in the source presentation.
+           Add a <source> here (e.g. assets/audio/theme.mp3) to enable
+           background music; the volume/mute UI is already wired up. -->
+    </audio>
+
+    <audio id="narration-audio" preload="none" hidden>
+      <!-- Per-panel story narration. No files supplied yet — see
+           assets/audio/narration/README.txt for the expected filenames.
+           Loaded dynamically by js/app.js; respects the same
+           volume/mute state as bg-audio. -->
+    </audio>
+
+    <div id="sr-live" class="sr-only" role="status" aria-live="polite"></div>
+  </div>
+
+  <script src="js/screens.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

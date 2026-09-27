@@ -1,0 +1,411 @@
+:root {
+  --cream: #ece3d3;
+  --parchment: #e4d8c2;
+  --brown-dark: #241a10;
+  --brown: #4a3320;
+  --brown-mid: #6b4a2e;
+  --accent-red: #8a2e1f;
+  --focus: #d98c2b;
+  --radius: 4px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--brown-dark);
+  color: var(--cream);
+  font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+  overflow: hidden;
+}
+
+#app {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------------- Top chrome bar (not part of the source deck) ---- */
+.chrome-bar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.9rem;
+  background: var(--brown-dark);
+  border-bottom: 1px solid #000;
+}
+
+.chrome-title {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b9a887;
+  opacity: 0.85;
+}
+
+.chrome-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chrome-btn {
+  appearance: none;
+  border: 1px solid #5a4630;
+  background: #33261a;
+  color: var(--cream);
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chrome-btn:hover {
+  background: #453322;
+}
+
+.chrome-btn:focus-visible,
+.hotspot:focus-visible,
+.story-nav:focus-visible,
+.options-back:focus-visible,
+.placeholder-back:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* ---------------- Stage ------------------------------------------- */
+#stage {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.5rem, 2vh, 1.5rem);
+  background: radial-gradient(ellipse at center, #2b2015 0%, #171008 100%);
+}
+
+#frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  background: var(--cream);
+  transition: opacity 220ms ease;
+}
+
+#frame.is-transitioning {
+  opacity: 0;
+}
+
+/* Fit the aspect-ratio box within #stage without distortion */
+#frame {
+  margin: auto;
+}
+
+@supports (aspect-ratio: 1) {
+  #frame {
+    width: min(100%, calc((100vh - 6rem) * 1.78));
+    height: min(100%, calc((100vw) / 1.78));
+  }
+}
+
+#screen-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+#hotspots {
+  position: absolute;
+  inset: 0;
+}
+
+/* ---------------- Menu-screen hotspots (invisible hit areas over
+   the printed buttons already drawn in the source artwork) --------- */
+.hotspot {
+  position: absolute;
+  appearance: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.hotspot:hover {
+  background: rgba(255, 235, 200, 0.08);
+  border-radius: var(--radius);
+}
+
+/* ---------------- Story panel chrome (added, not in source) ------- */
+.story-chrome {
+  pointer-events: none;
+}
+.story-chrome > * {
+  pointer-events: auto;
+}
+
+.story-nav {
+  position: absolute;
+  bottom: 3%;
+  appearance: none;
+  border: 1px solid #2a1c10;
+  background: rgba(36, 26, 16, 0.82);
+  color: var(--cream);
+  font-family: inherit;
+  font-size: clamp(0.75rem, 1.4vw, 1rem);
+  padding: 0.5em 1em;
+  border-radius: 999px;
+  cursor: pointer;
+  backdrop-filter: blur(2px);
+}
+.story-nav:hover {
+  background: rgba(58, 42, 26, 0.92);
+}
+.story-nav--prev {
+  left: 3%;
+}
+.story-nav--next {
+  right: 3%;
+}
+
+.story-counter {
+  position: absolute;
+  bottom: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+  background: rgba(36, 26, 16, 0.7);
+  padding: 0.4em 0.8em;
+  border-radius: 999px;
+  letter-spacing: 0.05em;
+}
+
+/* ---------------- Options screen (custom panel, no artwork) -------- */
+.options-chrome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--parchment);
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(74, 51, 32, 0.03) 0,
+    rgba(74, 51, 32, 0.03) 2px,
+    transparent 2px,
+    transparent 10px
+  );
+}
+
+.options-card {
+  width: min(88%, 26rem);
+  margin: 2rem;
+  padding: 2.2rem 2.4rem;
+  border: 2px solid var(--brown-mid);
+  border-radius: 8px;
+  background: rgba(255, 252, 245, 0.78);
+  text-align: center;
+  color: var(--brown-dark);
+}
+
+.options-card h2 {
+  margin: 0 0 1.8rem;
+  font-size: clamp(1.3rem, 2.8vw, 1.9rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.options-volume-row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.opt-mute-toggle {
+  appearance: none;
+  flex: 0 0 auto;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 1px solid var(--brown-mid);
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--brown-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.opt-mute-toggle:hover {
+  background: #ddd0b6;
+}
+.opt-mute-toggle svg {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.opt-volume-slider {
+  flex: 1 1 auto;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--brown-mid);
+  outline: none;
+  cursor: pointer;
+}
+.opt-volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  background: var(--accent-red);
+  border: 2px solid var(--cream);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+.opt-volume-slider::-moz-range-track {
+  height: 0.4rem;
+  border-radius: 999px;
+  background: transparent;
+}
+.opt-volume-slider::-moz-range-thumb {
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  background: var(--accent-red);
+  border: 2px solid var(--cream);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.options-volume-value {
+  flex: 0 0 auto;
+  width: 2.6rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  color: var(--brown);
+}
+
+.options-back {
+  appearance: none;
+  border: 1px solid var(--brown);
+  background: var(--cream);
+  color: var(--brown-dark);
+  font-family: inherit;
+  font-size: clamp(0.8rem, 1.4vw, 1rem);
+  padding: 0.5em 1.1em;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.options-back:hover {
+  background: #ddd0b6;
+}
+
+/* ---------------- Placeholder screens ------------------------------ */
+.placeholder-chrome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--parchment);
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(74, 51, 32, 0.03) 0,
+    rgba(74, 51, 32, 0.03) 2px,
+    transparent 2px,
+    transparent 10px
+  );
+}
+
+.placeholder-card {
+  max-width: 32rem;
+  margin: 2rem;
+  padding: 2rem 2.2rem;
+  border: 2px dashed var(--brown-mid);
+  border-radius: 8px;
+  background: rgba(255, 252, 245, 0.6);
+  text-align: center;
+  color: var(--brown-dark);
+}
+
+.placeholder-card h2 {
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.2rem, 2.6vw, 1.7rem);
+  letter-spacing: 0.03em;
+}
+
+.placeholder-card p {
+  margin: 0 0 1.2rem;
+  line-height: 1.5;
+  font-size: clamp(0.85rem, 1.6vw, 1rem);
+  color: var(--brown);
+}
+
+.placeholder-back {
+  appearance: none;
+  border: 1px solid var(--brown);
+  background: var(--brown-dark);
+  color: var(--cream);
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.55em 1.3em;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.placeholder-back:hover {
+  background: #33261a;
+}
+
+/* ---------------- Screen-reader only live region -------------------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------------- Reduced motion ------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  #frame {
+    transition: none !important;
+  }
+}
+
+/* ---------------- Responsive tweaks --------------------------------- */
+@media (max-width: 640px) {
+  .chrome-title {
+    display: none;
+  }
+  .story-counter {
+    display: none;
+  }
+  .story-nav {
+    font-size: 0.75rem;
+    padding: 0.45em 0.8em;
+  }
+}
