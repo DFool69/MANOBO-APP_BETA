@@ -55,7 +55,7 @@ const SCREENS = {
     image: "assets/images/page-03.jpg",
     ratio: RATIO_MENU,
     alt: "Opening narration over a misty jungle scene: The gongs of Mount Apo grow silent, traveler...",
-    buttons: [{ x: 86, y: 82, w: 13, h: 17, target: "manobo-title", label: "Next" }],
+    buttons: [{ x: 89.5, y: 81.5, w: 9.5, h: 17, target: "manobo-title", label: "Next" }],
   },
   "manobo-title": {
     id: "manobo-title",
@@ -63,7 +63,7 @@ const SCREENS = {
     image: "assets/images/page-04.jpg",
     ratio: RATIO_MENU,
     alt: "Section title: Manobo Tribe, over a moonlit palm canopy.",
-    buttons: [{ x: 86, y: 82, w: 13, h: 17, target: "manobo-photo", label: "Next" }],
+    buttons: [{ x: 89.5, y: 81.5, w: 9.5, h: 17, target: "manobo-photo", label: "Next" }],
   },
   "manobo-photo": {
     id: "manobo-photo",
@@ -71,7 +71,7 @@ const SCREENS = {
     image: "assets/images/page-05.jpg",
     ratio: RATIO_MENU,
     alt: "Photograph of an Ata-Manobo family in traditional attire. Source: National Commission on Indigenous Peoples.",
-    buttons: [{ x: 86, y: 82, w: 13, h: 17, target: "play-learn", label: "Next" }],
+    buttons: [{ x: 89.5, y: 81.5, w: 9.5, h: 17, target: "play-learn", label: "Next" }],
   },
 
   // ---------------------------------------------------------------
@@ -107,7 +107,7 @@ const SCREENS = {
       { x: 55, y: 12, w: 35, h: 30, target: "placeholder-art", label: "Art and Crafts" },
       { x: 10, y: 50, w: 35, h: 32, target: "placeholder-religion", label: "Religion and Beliefs" },
       { x: 55, y: 50, w: 35, h: 32, target: "story-00", label: "Literatures" },
-      { x: 87, y: 83, w: 10, h: 15, target: "play-learn", label: "Return" },
+      { x: 89.5, y: 81.5, w: 9.5, h: 17, target: "play-learn", label: "Return" },
     ],
   },
 
