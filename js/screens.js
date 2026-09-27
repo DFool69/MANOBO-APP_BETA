@@ -29,8 +29,8 @@ const SCREENS = {
     ratio: RATIO_MENU,
     alt: "Title screen with a moonlit thatched Manobo hut and two banners reading START and OPTIONS.",
     buttons: [
-      { x: 68, y: 32, w: 22, h: 8, target: "opening", label: "Start" },
-      { x: 68, y: 44, w: 22, h: 8, target: "options", label: "Options" },
+      { x: 66.5, y: 31.5, w: 25, h: 19, target: "opening", label: "Start" },
+      { x: 67, y: 56, w: 25, h: 19, target: "options", label: "Options" },
     ],
   },
 
